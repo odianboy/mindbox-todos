@@ -3,6 +3,8 @@
 ```bash
 npm run install
 
-nprm run dev
+npm run start
+
+npm run test
 
 ```

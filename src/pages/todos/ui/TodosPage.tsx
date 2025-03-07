@@ -9,11 +9,11 @@ import {
     TodoFilterEnum,
     TodoItem,
     TODOS_LOCAL_STORAGE_KEY,
-    TodoType,
+    TodoItemType,
 } from '@/entities/todos'
 
 export const TodosPage = () => {
-    const [todos, setTodos] = useState<TodoType[]>([])
+    const [todos, setTodos] = useState<TodoItemType[]>([])
     const [filter, setFilter] = useState<TodoFilterEnum>(TodoFilterEnum.ALL)
 
     useEffect(() => {
@@ -23,6 +23,11 @@ export const TodosPage = () => {
 
     const leftTodos = useMemo(
         () => todos.filter((todo) => !todo.completed).length,
+        [todos]
+    )
+
+    const completeTodos = useMemo(
+        () => todos.filter((todo) => todo.completed).length,
         [todos]
     )
 
@@ -50,7 +55,7 @@ export const TodosPage = () => {
         })
     }, [todos, filter])
 
-    const onAddHandle = useCallback((todo: TodoType) => {
+    const onAddHandle = useCallback((todo: TodoItemType) => {
         setTodos((prevTodos) => {
             const updatedTodos = [...prevTodos, todo]
             localStorage.setItem(
@@ -61,7 +66,7 @@ export const TodosPage = () => {
         })
     }, [])
 
-    const onChangeTodoHandle = useCallback((currentTodo: TodoType) => {
+    const onChangeTodoHandle = useCallback((currentTodo: TodoItemType) => {
         setTodos((prevTodos) => {
             const updatedTodos = prevTodos.map((todo) =>
                 todo.id === currentTodo.id
@@ -81,28 +86,25 @@ export const TodosPage = () => {
             vertical
             gap={10}
             style={{
-                width: '30dvw',
+                maxWidth: 500,
+                margin: '0 auto',
+                padding: '10px',
             }}
         >
             <Typography.Title
                 style={{
                     textAlign: 'center',
                     fontFamily: '"Press Start 2P", system-ui',
+                    fontSize: '1.7rem',
                 }}
             >
                 Mindbox-todos
             </Typography.Title>
-            <Flex justify="space-between">
-                <FilterTodos filter={filter} setFilter={setFilter} />
-
-                <Button variant="filled" onClick={onClearCompletedHandle}>
-                    Очистить выполненные
-                </Button>
-            </Flex>
+            <FilterTodos filter={filter} setFilter={setFilter} />
             <InputTextTodo onAddHandle={onAddHandle} />
             <List
                 style={{
-                    height: 400,
+                    height: '30vh',
                     overflow: 'auto',
                 }}
                 dataSource={filteredTodos}
@@ -114,17 +116,22 @@ export const TodosPage = () => {
                     />
                 )}
             />
-            <div
-                style={{
-                    height: 100,
-                }}
-            >
+
+            <div style={{ textAlign: 'center', height: 30 }}>
                 {leftTodos > 0 && (
-                    <Typography.Text style={{ width: '100%' }} strong>
-                        {leftTodos} невыполненных задач
+                    <Typography.Text strong>
+                        Невыполненных задач: {leftTodos}
                     </Typography.Text>
                 )}
             </div>
+
+            <Button
+                type="primary"
+                onClick={onClearCompletedHandle}
+                disabled={!completeTodos}
+            >
+                Очистить выполненные
+            </Button>
         </Flex>
     )
 }

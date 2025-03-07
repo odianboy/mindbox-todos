@@ -4,9 +4,9 @@ import { Flex } from 'antd'
 
 import { TodoFilterEnum } from '@/entities/todos'
 
-import { FilterButton } from './FilterButton.tsx'
-
 import { FILTERS } from '../../config/filters.ts'
+
+import { FilterButton } from './FilterButton.tsx'
 
 type FilterTodosProps = {
     filter: TodoFilterEnum

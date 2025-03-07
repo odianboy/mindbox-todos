@@ -1,10 +1,10 @@
 import { Checkbox, List } from 'antd'
 
-import { TodoType } from '../model/types.ts'
+import { TodoItemType } from '../model/types.ts'
 
 type TodoItemProps = {
-    todo: TodoType
-    onChangeHandle: (todo: TodoType) => void
+    todo: TodoItemType
+    onChangeHandle: (todo: TodoItemType) => void
 }
 
 export const TodoItem = (props: TodoItemProps) => {

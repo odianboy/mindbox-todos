@@ -2,10 +2,10 @@ import { ChangeEvent, useCallback, useRef, useState } from 'react'
 
 import { Button, Input, InputRef, Space } from 'antd'
 
-import { TodoType } from '@/entities/todos'
+import { TodoItemType } from '@/entities/todos'
 
 type InputTextTodoProps = {
-    onAddHandle: (todo: TodoType) => void
+    onAddHandle: (todo: TodoItemType) => void
 }
 
 export const InputTextTodo = (props: InputTextTodoProps) => {
