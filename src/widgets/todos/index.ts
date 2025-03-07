@@ -1,2 +1,2 @@
-export { InputTextTodo } from './ui/InputTextTodo.tsx'
-export { FilterTodos } from './ui/FilterTodos.tsx'
+export { InputTextTodo } from './ui/input/InputTextTodo.tsx'
+export { FilterTodos } from './ui/filter/FilterTodos.tsx'

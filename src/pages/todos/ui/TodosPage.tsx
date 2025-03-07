@@ -87,9 +87,10 @@ export const TodosPage = () => {
             <Typography.Title
                 style={{
                     textAlign: 'center',
+                    fontFamily: '"Press Start 2P", system-ui',
                 }}
             >
-                todos
+                Mindbox-todos
             </Typography.Title>
             <Flex justify="space-between">
                 <FilterTodos filter={filter} setFilter={setFilter} />
@@ -98,7 +99,6 @@ export const TodosPage = () => {
                     Очистить выполненные
                 </Button>
             </Flex>
-
             <InputTextTodo onAddHandle={onAddHandle} />
             <List
                 style={{
@@ -114,9 +114,17 @@ export const TodosPage = () => {
                     />
                 )}
             />
-            <Typography.Text style={{ width: '100%' }}>
-                {leftTodos} невыполненных задач
-            </Typography.Text>
+            <div
+                style={{
+                    height: 100,
+                }}
+            >
+                {leftTodos > 0 && (
+                    <Typography.Text style={{ width: '100%' }} strong>
+                        {leftTodos} невыполненных задач
+                    </Typography.Text>
+                )}
+            </div>
         </Flex>
     )
 }

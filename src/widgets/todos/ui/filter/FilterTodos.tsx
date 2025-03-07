@@ -6,7 +6,7 @@ import { TodoFilterEnum } from '@/entities/todos'
 
 import { FilterButton } from './FilterButton.tsx'
 
-import { FILTERS } from '../config/filters.ts'
+import { FILTERS } from '../../config/filters.ts'
 
 type FilterTodosProps = {
     filter: TodoFilterEnum

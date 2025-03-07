@@ -1,6 +1,6 @@
 import { render, screen, fireEvent, act } from '@testing-library/react'
 
-import { InputTextTodo } from './InputTextTodo'
+import { InputTextTodo } from './InputTextTodo.tsx'
 import userEvent from '@testing-library/user-event'
 
 describe('input todo', () => {

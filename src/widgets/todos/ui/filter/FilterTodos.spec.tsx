@@ -2,7 +2,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 
 import { TodoFilterEnum } from '@/entities/todos'
 
-import { FilterTodos } from './FilterTodos'
+import { FilterTodos } from './FilterTodos.tsx'
 
 test('changes the filter when the buttons are pressed', () => {
     const mockSetFilter = jest.fn()
