@@ -3,14 +3,15 @@ import { Button, Flex, List, Typography } from 'antd'
 
 import 'antd/dist/reset.css'
 
-import { FilterTodos, InputTextTodo } from '@/widgets/todos'
-
 import {
     TodoFilterEnum,
     TodoItem,
     TODOS_LOCAL_STORAGE_KEY,
     TodoItemType,
 } from '@/entities/todos'
+
+import { FilterTodos } from '../FilterTodos'
+import { InputTextTodo } from '../InputTextTodo'
 
 export const TodosPage = () => {
     const [todos, setTodos] = useState<TodoItemType[]>([])
@@ -21,16 +22,16 @@ export const TodosPage = () => {
         setTodos(savedTodos ? JSON.parse(savedTodos) : [])
     }, [])
 
-    const leftTodos = useMemo(
-        () => todos.filter((todo) => !todo.completed).length,
-        [todos]
-    )
-
-    const completeTodos = useMemo(
-        () => todos.filter((todo) => todo.completed).length,
-        [todos]
-    )
-
+    const { leftTodos, completeTodos } = useMemo(() => {
+        return todos.reduce(
+            (acc, todo) => ({
+                ...acc,
+                leftTodos: acc.leftTodos + (!todo.completed ? 1 : 0),
+                completeTodos: acc.completeTodos + (todo.completed ? 1 : 0),
+            }),
+            { leftTodos: 0, completeTodos: 0 }
+        )
+    }, [todos])
     const onClearCompletedHandle = useCallback(() => {
         setTodos((prevTodos) => {
             const updatedTodos = prevTodos.filter((todo) => !todo.completed)
